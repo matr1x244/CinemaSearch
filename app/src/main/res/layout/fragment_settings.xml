@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MyLinearLayout"
+    android:background="#fff">
+
+    <android.support.v7.widget.Toolbar
+        style="@style/MyToolbar"
+        android:id="@+id/toolbar_home"
+        app:title="@string/desc_home">
+
+        <TextView
+            android:text="@string/desc_settings"
+            style="@style/Toolbar_TextView"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.CardView
+        app:cardBackgroundColor="#00FFFFFF"
+        style="@style/MyCardView">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="65dp"
+            app:srcCompat="@drawable/ic_star_border"
+            tools:ignore="RtlHardcoded"
+            android:contentDescription="TODO"></ImageView>
+
+        <TextView
+            android:text="@string/default_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rating_value"
+            android:layout_gravity="right"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="8dp"
+            android:textColor="#666666"/>
+
+        <TextView
+            android:text="@string/imdb_rating"
+            android:id="@+id/textView"
+            style="@style/MyTextView"/>
+
+        <SeekBar
+            android:id="@+id/rating_bar"
+            style="@android:style/Widget.Material.SeekBar.Discrete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#12F602"
+            android:foregroundTint="#FFFFFF"
+            android:indeterminateTint="#FFFFFF"
+            android:max="10"
+            android:progress="5"
+            android:progressBackgroundTint="@color/colorAccent"
+            android:progressTint="#00B0FF"
+            android:secondaryProgressTint="@color/cardview_light_background" />
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        style="@style/MyCardView"
+        app:cardBackgroundColor="#00FFFFFF"
+        app:cardCornerRadius="0dp">
+
+        <TextView
+            style="@style/MyTextView"
+            android:text="@string/movie_filters" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recView_settings"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="#00FFFFFF" />
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

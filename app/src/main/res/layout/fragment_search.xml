@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MyLinearLayout">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_search"
+        style="@style/MyToolbar"
+        android:layout_width="match_parent"
+        android:focusable="auto">
+
+        <android.support.v7.widget.SearchView
+            android:id="@+id/search_view"
+            style="@android:style/Widget.Material.SearchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/activity_vertical_margin"
+            android:background="@color/cardview_light_background"
+            android:visibility="visible"
+            app:cardCornerRadius="16dp"
+            tools:ignore="PrivateResource" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recView_search"
+        style="@style/MyRecyclerView"
+        app:cardCornerRadius="16dp" />
+</LinearLayout>

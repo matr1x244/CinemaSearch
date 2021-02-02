@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">КиноПросмотр</string>
+    <!-- Главный экран -->
+    <string name="title_home">Фильмы</string>
+    <string name="title_search">Поиск</string>
+    <string name="title_settings">Настройки</string>
+
+    <!-- Для отображения стандарта видео -->
+    <string name="desc_home">Фильми и Сериалы</string>
+    <string name="movie_title">Фильм</string>
+    <string name="default_imdb_rating">Рейтинг фильма: 8.0</string>
+
+    <!-- Для экрана настроек -->
+    <string name="desc_settings">Фильтр</string>
+
+    <string name="imdb_rating">Рейтинг</string>
+    <string name="default_rating">5.0</string>
+    <string name="movie_filters">Параметры фильмов (тут я думаю будет брать из API настройки)</string>
+
+    </resources>
