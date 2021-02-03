@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.SearchView
+import android.util.Log
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -16,10 +17,13 @@ import kotlinx.android.synthetic.main.fragment_search.*
 
 class MainActivity : AppCompatActivity() {
 
+    private val TAG = "MainActivity"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setTheme(R.style.AppTheme)
+        Log.v(TAG, "onCreate")
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         val navController = findNavController(R.id.nav_host_fragment)
@@ -38,6 +42,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun internetSearch() {
         val newsCinema: FloatingActionButton = findViewById(R.id.FloatingActionButtonNews)
+        Log.d(TAG, "internetSearch")
         newsCinema.setOnClickListener { view ->
             val addres =
                 Uri.parse("https://www.kinopoisk.ru/media/news/")
