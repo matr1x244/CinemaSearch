@@ -18,6 +18,7 @@
 
     <android.support.v7.widget.CardView
         app:cardBackgroundColor="#00FFFFFF"
+        app:cardCornerRadius="1dp"
         style="@style/MyCardView">
 
         <ImageView
@@ -28,17 +29,18 @@
             android:layout_marginRight="65dp"
             app:srcCompat="@drawable/ic_star_border"
             tools:ignore="RtlHardcoded"
-            android:contentDescription="TODO"></ImageView>
+            android:contentDescription="TODO" />
 
         <TextView
             android:text="@string/default_rating"
+            android:id="@+id/rating_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/rating_value"
             android:layout_gravity="right"
-            android:layout_marginRight="40dp"
+            android:layout_marginEnd="40dp"
             android:layout_marginTop="8dp"
-            android:textColor="#666666"/>
+            android:textColor="#666666"
+            tools:ignore="RtlHardcoded" />
 
         <TextView
             android:text="@string/imdb_rating"
@@ -67,7 +69,7 @@
     <android.support.v7.widget.CardView
         style="@style/MyCardView"
         app:cardBackgroundColor="#00FFFFFF"
-        app:cardCornerRadius="0dp">
+        app:cardCornerRadius="1dp">
 
         <TextView
             style="@style/MyTextView"

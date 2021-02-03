@@ -8,7 +8,12 @@ import android.widget.TextView
 import android.support.v4.app.Fragment
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.SearchView
+import android.util.Log
+import android.view.Menu
 import com.geekbrains.kino.R
+
 
 class SearchFragment : Fragment() {
 
@@ -28,4 +33,5 @@ class SearchFragment : Fragment() {
         })
         return root
     }
+
 }
