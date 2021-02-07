@@ -8,8 +8,4 @@ class SettingsViewModel : ViewModel() {
 
     private val TAG = "SettingsViewModel"
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "5.0"
-    }
-    val text: LiveData<String> = _text
 }
