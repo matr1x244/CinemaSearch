@@ -9,7 +9,11 @@
     <string name="desc_home">Фильми и Сериалы</string>
     <string name="movie_title">Фильм Название</string>
     <string name="default_imdb_rating">Рейтинг фильма: 8.0</string>
+    <string name="year_cinema">2020 год</string>
     <string name="about_cinema">О Фильме..</string>
+
+    <string name="error">Ошибка</string>
+    <string name="reload">Перезагрузка</string>
 
     <!-- Для экрана настроек -->
     <string name="desc_settings">Фильтр</string>

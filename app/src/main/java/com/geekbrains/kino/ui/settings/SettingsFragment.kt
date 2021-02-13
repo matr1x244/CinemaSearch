@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment
 import android.arch.lifecycle.ViewModelProviders
 import android.widget.TextView
 import com.geekbrains.kino.R
-
+import kotlinx.android.synthetic.main.item_movie.*
 
 class SettingsFragment : Fragment() {
 

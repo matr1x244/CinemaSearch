@@ -5,6 +5,7 @@
     style="@style/MyLinearLayout"
     android:background="#fff">
 
+
     <android.support.v7.widget.Toolbar
         style="@style/MyToolbar"
         android:id="@+id/toolbar_home"

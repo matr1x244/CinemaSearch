@@ -12,6 +12,7 @@ import com.geekbrains.kino.R
 
 class SearchFragment : Fragment() {
 
+    private val TAG = "SearchFragment"
     private lateinit var searchViewModel: SearchViewModel
 
     override fun onCreateView(
@@ -21,6 +22,7 @@ class SearchFragment : Fragment() {
     ): View? {
         searchViewModel = ViewModelProviders.of(this).get(SearchViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_search, container, false)
+
         return root
     }
 

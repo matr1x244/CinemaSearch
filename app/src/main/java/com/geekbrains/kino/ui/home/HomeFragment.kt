@@ -7,45 +7,85 @@ import android.view.View
 import android.view.ViewGroup
 import android.support.v4.app.Fragment
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Intent
-import android.net.Uri
-import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
-import android.util.Log
-import android.widget.Toast
+import com.geekbrains.kino.AppState
 import com.geekbrains.kino.R
+import com.geekbrains.kino.ui.home.interactors.ImageInteractorImpl
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_settings.*
+import kotlinx.android.synthetic.main.item_movie.*
 
 class HomeFragment : Fragment() {
 
     private val TAG = "HomeFragment"
     private lateinit var homeViewModel: HomeViewModel
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+    private val adapter = HomeFragmentAdapter(object : OnItemViewClickListener {
+        override fun onItemViewClick(cinema: Cinema) {
+            val manager = activity?.supportFragmentManager
+            if (manager != null) {
+                val bundle = Bundle()
+                bundle.putParcelable(DetailsFragment.BUNDLE_EXTRA, cinema)
+                manager.beginTransaction()
+                    .add(R.id.container, DetailsFragment.newInstance(bundle))
+                    .addToBackStack("")
+                    .commitAllowingStateLoss()
+            }
+        }
+    })
 
+    override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?
+    ): View? {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.item_movie, container, false)
-        val View = inflater.inflate(R.layout.item_movie, container, false)
-
-        val observer = Observer <Any> { startReload(it) }
-
-        homeViewModel.getCinemaFromLocalStorage()
-
-        homeViewModel.getStartReload().observe(viewLifecycleOwner, observer)
+        homeViewModel.imageInteractor = ImageInteractorImpl()
+        homeViewModel.getLiveData().observe(viewLifecycleOwner, Observer { renderData(it) }) // !!!!!!!!!!!!!!!
+        homeViewModel.fabImageLiveData.observe(viewLifecycleOwner, Observer { renderFabImage(it)}) // !!!!!!!!!!!!!!!
+        mainFragmentFAB.setOnClickListener {homeViewModel.onFABClicked(renderFabImage(it)) } // !!!!!!!!!!!!!!!
+        homeViewModel.getFromLocalStorageCinameRus()
+        homeViewModel.getFromLocalStorageCinemaWorld()
 
         lifecycle.addObserver(homeViewModel) // цикл жизни
 
         return root
     }
 
-    private fun startReload(data: Any?) { // Thread getStart
-        Log.d(TAG, "startReload")
-        Toast.makeText(context, data.toString(), Toast.LENGTH_SHORT).show()
+     private fun renderFabImage(imageRes: Int) { // !!!!!!!!!!!!!!!
+        mainFragmentFAB.setImageResource(imageRes)
     }
 
+
+    private fun renderData(appState: AppState) {
+        when (appState) {
+            is AppState.Success -> {
+                base_cardview.visibility = View.GONE
+                adapter.setCinema(appState.CinemaData)
+            }
+            is AppState.Loading -> {
+                base_cardview.visibility = View.VISIBLE
+            }
+            is AppState.Error -> {
+                base_cardview.visibility = View.GONE
+                Snackbar
+                    .make(textView, getString(R.string.error), Snackbar.LENGTH_INDEFINITE)
+                    .setAction(getString(R.string.reload)) { homeViewModel.getFromLocalStorageCinameRus() }
+                    .show()
+            }
+        }
+    }
+
+        override fun onDestroy() {
+            adapter.removeListener()
+            super.onDestroy()
+        }
+
+    companion object {
+        fun newInstance() = HomeFragment()
+    }
 }
+
+
+
+
 
 

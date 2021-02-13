@@ -2,49 +2,67 @@ package com.geekbrains.kino.ui.home
 
 import android.arch.lifecycle.*
 import android.util.Log
+import com.geekbrains.kino.AppState
+import com.geekbrains.kino.ui.home.interactors.ImageInteractor
 import java.lang.Thread.sleep
 
-class HomeViewModel(private val liveStartReload : MutableLiveData <Any> = MutableLiveData()) : ViewModel(), LifecycleObserver {
+class HomeViewModel (
 
-    private val repository: RepositoryCinema = RepositoryImplCinema()
+    private val liveDataToObserve : MutableLiveData <Any> = MutableLiveData()) : ViewModel(), LifecycleObserver {
+
+    private val repository: Repository = RepositoryImpl()
+
     private val TAG = "HomeViewModel"
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    private fun OnCreateCinemaNews(){
-        Log.d(TAG, "OnCreateCinemaNews")
-        getCinemaFromLocalStorage()
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_START) // цикл жизни (запуска например..)
-    private fun onStart(){
-        Log.d(TAG, "Lifecycle.Event.ON_START")
-        liveStartReload.value = "Загружаем новые фильмы"
-    }
 
     fun getStartReload(): LiveData<Any> {
         Log.d(TAG, "getStartReload")
         getStart()
-        return liveStartReload
+        return liveDataToObserve
     }
 
-     fun getCinemaFromServer () = getDataFromLocalStorage ()
-     fun getCinemaFromLocalStorage() = getDataFromLocalStorage()
+    var fabImageLiveData: MutableLiveData<Int> = MutableLiveData()
 
-    private fun getDataFromLocalStorage() {
-        Thread {
-            sleep(1000)
-            liveStartReload.postValue(repository.getCinemaFromLocalStorage()) // вывести пока что сообщение что поток этот запущен
-        }.start()
-    }
+    lateinit var imageInteractor: ImageInteractor
+
+    private var isDataSetRus: Boolean = true
+
+    fun getLiveData() = liveDataToObserve
+
+    fun getFromLocalStorageCinameRus() = getDataFromLocalSource(true)
+
+    fun getFromLocalStorageCinemaWorld() = getDataFromLocalSource(false)
+
+    fun getFromRemoteSource() = getDataFromLocalSource(true)
 
         private fun getStart(){ // далее прикрутить запуск загрузки базы данных фильмов
         Thread{
             Log.d(TAG, "Thread getStart")
             Thread.sleep(1000)
-            liveStartReload.postValue("Успешное обновление")
+            liveDataToObserve.postValue("Успешное обновление")
         }.start()
     }
 
+    fun onFABClicked(renderFabImage: Unit) {
+        if (isDataSetRus) {
+            getFromLocalStorageCinemaWorld()
+            fabImageLiveData.postValue(imageInteractor.worldImage)
+        } else {
+            getFromLocalStorageCinameRus()
+            fabImageLiveData.postValue(imageInteractor.rusImage)
+        }
+        isDataSetRus = !isDataSetRus
+    }
+
+    private fun getDataFromLocalSource(isRussian: Boolean) {
+        liveDataToObserve.value = AppState.Loading
+        Thread {
+            sleep(1000)
+            liveDataToObserve.postValue(AppState.Success(
+                if (isRussian) repository.getFromLocalStorageCinameRus()
+                else repository.getFromLocalStorageCinemaWorld())
+            )
+        }.start()
+    }
         fun OnCleared() {
             super.onCleared()
         }

@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:background="@android:drawable/editbox_background_normal"
         android:backgroundTint="#FFFFFF"
+        android:clickable="true"
         android:visibility="visible"
         app:itemTextColor="@android:color/holo_blue_dark"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,5 +50,17 @@
         app:srcCompat="@drawable/ic_new_releases"
         tools:ignore="MissingConstraints" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/mainFragmentFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_russia"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:layout_constraintEnd_toEndOf="@+id/nav_host_fragment"
+        app:layout_constraintStart_toStartOf="@+id/nav_host_fragment"
+        app:layout_constraintTop_toTopOf="@+id/nav_host_fragment"
+        app:maxImageSize="55dp"
+        tools:ignore="MissingConstraints" />
 
 </android.support.constraint.ConstraintLayout>
