@@ -17,10 +17,6 @@ class HomeFragmentAdapter(private var onItemViewClickListener: OnItemViewClickLi
         notifyDataSetChanged()
     }
 
-    fun removeListener() {
-        onItemViewClickListener = null
-    }
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -42,7 +38,7 @@ class HomeFragmentAdapter(private var onItemViewClickListener: OnItemViewClickLi
     inner class HomeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         fun bind(cinema: Cinema) {
-            itemView.HomeFragmentRecyclerItemTextView.text = cinema.cinema
+            itemView.HomeFragmentRecyclerItemTextView.text = cinema.toString()
             itemView.setOnClickListener {
                 onItemViewClickListener?.onItemViewClick(cinema)
             }

@@ -18,7 +18,7 @@ fun getWorldCinema(): List<Cinema> {
         )
 }
 
-fun getRussianCiname(): List<Cinema> {
+fun getRussianCinema(): List<Cinema> {
     return listOf(
         Cinema(2020, 3.0),
         Cinema(2019, 5.0)

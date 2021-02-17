@@ -20,6 +20,6 @@
 
     <string name="imdb_rating">Рейтинг</string>
     <string name="default_rating">5.0</string>
-    <string name="movie_filters">Параметры фильмов (тут я думаю будет брать из API настройки)</string>
+    <string name="movie_filters">Параметры фильмов</string>
 
     </resources>

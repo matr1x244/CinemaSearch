@@ -5,8 +5,8 @@ class RepositoryImpl : Repository { // возвращаем данные
         return Cinema()
     }
 
-    override fun getFromLocalStorageCinameRus(): List<Cinema> {
-        return getRussianCiname()
+    override fun getFromLocalStorageCinemaRus(): List<Cinema> {
+        return getRussianCinema()
     }
 
     override fun getFromLocalStorageCinemaWorld(): List<Cinema> {

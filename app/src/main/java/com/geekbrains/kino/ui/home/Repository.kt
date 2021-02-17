@@ -4,7 +4,7 @@ interface Repository { // забираем данные
 
     fun getCinemaFromServer(): Cinema
 
-    fun getFromLocalStorageCinameRus(): List<Cinema>
+    fun getFromLocalStorageCinemaRus(): List<Cinema>
 
     fun getFromLocalStorageCinemaWorld(): List<Cinema>
 }

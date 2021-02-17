@@ -10,7 +10,6 @@ import android.arch.lifecycle.ViewModelProviders
 import android.support.design.widget.Snackbar
 import com.geekbrains.kino.AppState
 import com.geekbrains.kino.R
-import com.geekbrains.kino.ui.home.interactors.ImageInteractorImpl
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.item_movie.*
@@ -38,11 +37,11 @@ class HomeFragment : Fragment() {
     ): View? {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.item_movie, container, false)
-        homeViewModel.imageInteractor = ImageInteractorImpl()
-        homeViewModel.getLiveData().observe(viewLifecycleOwner, Observer { renderData(it) }) // !!!!!!!!!!!!!!!
-        homeViewModel.fabImageLiveData.observe(viewLifecycleOwner, Observer { renderFabImage(it)}) // !!!!!!!!!!!!!!!
-        mainFragmentFAB.setOnClickListener {homeViewModel.onFABClicked(renderFabImage(it)) } // !!!!!!!!!!!!!!!
-        homeViewModel.getFromLocalStorageCinameRus()
+
+        homeViewModel.getLiveData().observe(viewLifecycleOwner, Observer {
+            renderData(it as AppState) })
+
+        homeViewModel.getFromLocalStorageCinemaRus()
         homeViewModel.getFromLocalStorageCinemaWorld()
 
         lifecycle.addObserver(homeViewModel) // цикл жизни
@@ -50,13 +49,8 @@ class HomeFragment : Fragment() {
         return root
     }
 
-     private fun renderFabImage(imageRes: Int) { // !!!!!!!!!!!!!!!
-        mainFragmentFAB.setImageResource(imageRes)
-    }
-
-
     private fun renderData(appState: AppState) {
-        when (appState) {
+     when (appState) {
             is AppState.Success -> {
                 base_cardview.visibility = View.GONE
                 adapter.setCinema(appState.CinemaData)
@@ -68,14 +62,13 @@ class HomeFragment : Fragment() {
                 base_cardview.visibility = View.GONE
                 Snackbar
                     .make(textView, getString(R.string.error), Snackbar.LENGTH_INDEFINITE)
-                    .setAction(getString(R.string.reload)) { homeViewModel.getFromLocalStorageCinameRus() }
+                    .setAction(getString(R.string.reload)) { homeViewModel.getFromLocalStorageCinemaRus() }
                     .show()
             }
         }
     }
 
         override fun onDestroy() {
-            adapter.removeListener()
             super.onDestroy()
         }
 

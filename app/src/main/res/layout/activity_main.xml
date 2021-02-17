@@ -50,17 +50,4 @@
         app:srcCompat="@drawable/ic_new_releases"
         tools:ignore="MissingConstraints" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/mainFragmentFAB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:src="@drawable/ic_russia"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
-        app:layout_constraintEnd_toEndOf="@+id/nav_host_fragment"
-        app:layout_constraintStart_toStartOf="@+id/nav_host_fragment"
-        app:layout_constraintTop_toTopOf="@+id/nav_host_fragment"
-        app:maxImageSize="55dp"
-        tools:ignore="MissingConstraints" />
-
 </android.support.constraint.ConstraintLayout>
